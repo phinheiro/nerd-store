@@ -4,7 +4,7 @@
 }
 
 <style>
-    ul > li {
+    ul>li {
         margin-right: 25px;
         font-weight: lighter;
         cursor: pointer
@@ -81,21 +81,22 @@
         border-left: 0;
     }
 
-    div.section > div {
+    div.section>div {
         width: 100%;
         display: inline-flex;
     }
 
-        div.section > div > input {
-            margin: 0;
-            padding-left: 5px;
-            font-size: 10px;
-            padding-right: 5px;
-            max-width: 18%;
-            text-align: center;
-        }
+    div.section>div>input {
+        margin: 0;
+        padding-left: 5px;
+        font-size: 10px;
+        padding-right: 5px;
+        max-width: 18%;
+        text-align: center;
+    }
 
-    .attr, .attr2 {
+    .attr,
+    .attr2 {
         cursor: pointer;
         margin-right: 5px;
         height: 20px;
@@ -105,31 +106,32 @@
         border-radius: 2px;
     }
 
-        .attr.active, .attr2.active {
-            border: 1px solid orange;
-        }
+    .attr.active,
+    .attr2.active {
+        border: 1px solid orange;
+    }
 
     @@media (max-width: 426px) {
         .container {
             margin-top: 0px !important;
         }
 
-            .container > .row {
-                padding: 0 !important;
-            }
+        .container>.row {
+            padding: 0 !important;
+        }
 
-                .container > .row > .col-xs-12.col-sm-5 {
-                    padding-right: 0;
-                }
+        .container>.row>.col-xs-12.col-sm-5 {
+            padding-right: 0;
+        }
 
-                .container > .row > .col-xs-12.col-sm-9 > div > p {
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
-                }
+        .container>.row>.col-xs-12.col-sm-9>div>p {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
 
-                .container > .row > .col-xs-12.col-sm-9 > div > ul {
-                    padding-left: 10px !important;
-                }
+        .container>.row>.col-xs-12.col-sm-9>div>ul {
+            padding-left: 10px !important;
+        }
 
         .section {
             width: 104%;
@@ -154,20 +156,24 @@
 
             <p>Apenas @Model.QuantidadeEstoque em estoque!</p>
             <p>@Model.Descricao</p>
+            <form method="post" asp-controller="Carrinho" , asp-action="AdicionarItem">
+                <input type="hidden" id="Id" name="Id" value="@Model.Id">
 
-            <div class="section" style="padding-bottom:20px;">
-                <h6 class="title-attr"><small>QUANTIDADE</small></h6>
-                <div>
-                    <div class="btn-minus"><span style="font-size: 15px">-</span></div>
-                    <input style="font-size: 15px" type="text" value="1" />
-                    <div class="btn-plus"><span style="font-size: 15px">+</span></div>
+                <div class="section" style="padding-bottom:20px;">
+                    <h6 class="title-attr"><small>QUANTIDADE</small></h6>
+                    <div>
+                        <div class="btn-minus"><span style="font-size: 15px">-</span></div>
+                        <input style="font-size: 15px" type="text" value="1" />
+                        <div class="btn-plus"><span style="font-size: 15px">+</span></div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Botones de compra -->
-            <div class="section" style="padding-bottom:20px;">
-                <button class="btn btn-success"><span style="margin-right:20px" aria-hidden="true"></span> Comprar agora!</button>
-            </div>
+                <!-- Botoes de compra -->
+                <div class="section" style="padding-bottom:20px;">
+                    <button class="btn btn-success"><span style="margin-right:20px" aria-hidden="true"></span> Comprar
+                        agora!</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -175,42 +181,39 @@
 
 @section Scripts
 {
-    <script>
-        $(document).ready(function(){
-            //-- Click on detail
-            $("ul.menu-items > li").on("click",function(){
-                $("ul.menu-items > li").removeClass("active");
-                $(this).addClass("active");
-            })
-
-            $(".attr,.attr2").on("click",function(){
-                var clase = $(this).attr("class");
-
-                $("." + clase).removeClass("active");
-                $(this).addClass("active");
-            })
-
-            //-- Click on QUANTITY
-            $(".btn-minus").on("click",function(){
-                var now = $(".section > div > input").val();
-                if ($.isNumeric(now)){
-                    if (parseInt(now) -1 > 0){ now--;}
-                    $(".section > div > input").val(now);
-                }else{
-                    $(".section > div > input").val("1");
-                }
-            })
-            $(".btn-plus").on("click",function(){
-                var now = $(".section > div > input").val();
-                if ($.isNumeric(now)){
-                    $(".section > div > input").val(parseInt(now)+1);
-                }else{
-                    $(".section > div > input").val("1");
-                }
-            })
+<script>
+    $(document).ready(function () {
+        //-- Click on detail
+        $("ul.menu-items > li").on("click", function () {
+            $("ul.menu-items > li").removeClass("active");
+            $(this).addClass("active");
         })
-    </script>
+
+        $(".attr,.attr2").on("click", function () {
+            var clase = $(this).attr("class");
+
+            $("." + clase).removeClass("active");
+            $(this).addClass("active");
+        })
+
+        //-- Click on QUANTITY
+        $(".btn-minus").on("click", function () {
+            var now = $(".section > div > input").val();
+            if ($.isNumeric(now)) {
+                if (parseInt(now) - 1 > 0) { now--; }
+                $(".section > div > input").val(now);
+            } else {
+                $(".section > div > input").val("1");
+            }
+        })
+        $(".btn-plus").on("click", function () {
+            var now = $(".section > div > input").val();
+            if ($.isNumeric(now)) {
+                $(".section > div > input").val(parseInt(now) + 1);
+            } else {
+                $(".section > div > input").val("1");
+            }
+        })
+    })
+</script>
 }
-
-
-
