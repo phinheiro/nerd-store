@@ -8,13 +8,13 @@ namespace NerdStore.Vendas.Domain
     public interface IPedidoRepository : IRepository<Pedido>
     {
         Task<Pedido> ObterPorId(Guid id);
-        Task<IEnumerable<Pedido>> ObterListaPorCliente(Guid clienteId);
+        Task<IEnumerable<Pedido>> ObterListaPorClienteId(Guid clienteId);
         Task<Pedido> ObterPedidoRascunhoPorClienteId(Guid clienteId);
         void Adicionar(Pedido pedido);
         void Atualizar(Pedido pedido);
 
         Task<PedidoItem> ObterItemPorId(Guid id);
-        Task<PedidoItem> ObterItmePorPedido(Guid pedidoId, Guid produtoId);
+        Task<PedidoItem> ObterItemPorPedido(Guid pedidoId, Guid produtoId);
         void AdicionarItem(PedidoItem item);
         void AtualizarItem(PedidoItem item);
         void RemoverItem(PedidoItem item);
